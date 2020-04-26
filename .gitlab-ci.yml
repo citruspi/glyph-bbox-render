@@ -18,14 +18,27 @@ yarn:
     paths:
       - assets/web/vendor
 
-rust_fmt:
-  stage: check
+cargo fmt:
+  stage: test
   before_script:
     - rustup component add rustfmt
   script:
     - cargo fmt -- --check
 
+cargo test:
+  stage: test
+  script:
+    - cargo test
+
 compile:
-  stage: build
+  stage: test
   script:
     - cargo build
+
+publish_dry_run:
+  stage: test
+  image: rust
+  before_script:
+    - cargo login $CRATES_IO_TOKEN
+  script:
+    - cargo publish --dry-run --allow-dirty
