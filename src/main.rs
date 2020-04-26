@@ -79,7 +79,7 @@ fn cli_entrypoint<'b, 'a>() -> App<'a, 'b> {
 
 #[tokio::main]
 async fn main() {
-    pretty_env_logger::init_custom_env("GLYPH_BBOX_GENERATE_LOG_LEVEL");
+    pretty_env_logger::init_custom_env("GLYPH_BBOX_RENDER_LOG_LEVEL");
 
     let rt = cli_entrypoint().get_matches();
 
