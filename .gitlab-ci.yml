@@ -5,9 +5,18 @@ default:
     - shared-exec-docker
 
 stages:
-  - check
   - assets
-  - build
+  - test
+
+yarn:
+  stage: assets
+  image: node:alpine
+  script:
+    - yarn install --modules-folder assets/web/vendor
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - assets/web/vendor
 
 rust_fmt:
   stage: check
@@ -15,18 +24,6 @@ rust_fmt:
     - rustup component add rustfmt
   script:
     - cargo fmt -- --check
-
-yarn:
-  stage: assets
-  image: node:alpine
-  before_script:
-    - apk add make
-  script:
-    - make deps
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - assets/web/vendor
 
 compile:
   stage: build

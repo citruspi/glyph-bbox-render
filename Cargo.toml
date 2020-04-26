@@ -3,6 +3,14 @@ name = "glyph-bbox-render"
 version = "0.1.0"
 authors = ["Mihir Singh <git.service@mihirsingh.com>"]
 edition = "2018"
+include = [
+    "Cargo.toml",
+    "Cargo.lock",
+    "src/**/*",
+    "assets/web/index.html",
+    "assets/web/main.js",
+    "assets/web/vendor/raphael/raphael.min.js",
+]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

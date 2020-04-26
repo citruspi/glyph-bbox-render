@@ -55,7 +55,7 @@ async fn main() {
                     });
                     let raphael_js = warp::path("raphael.js").and_then(|| {
                         glyph_bbox_render::web::serve_file(
-                            "vendor/raphael.min.js",
+                            "vendor/raphael/raphael.min.js",
                             "application/javascript",
                         )
                     });
