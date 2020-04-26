@@ -11,6 +11,12 @@ include = [
     "assets/web/main.js",
     "assets/web/vendor/raphael/raphael.min.js",
 ]
+license = "Unlicense"
+description = "glyph bbox dataset and bbox rendering"
+homepage = "https://src.doom.fm/citruspi/glyph-bbox-render"
+repository = "https://src.doom.fm/citruspi/glyph-bbox-render"
+keywords = ["rendering", "bbox", "bounding box", "glyph"]
+categories = ["rendering"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
