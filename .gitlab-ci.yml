@@ -36,7 +36,7 @@ compile:
   script:
     - cargo build
 
-publish_dry_run:
+publish dry run:
   stage: test
   image: rust
   before_script:
@@ -44,7 +44,7 @@ publish_dry_run:
   script:
     - cargo publish --dry-run --allow-dirty
 
-crates_io:
+crates.io:
   stage: publish
   before_script:
     - cargo login $CRATES_IO_TOKEN
