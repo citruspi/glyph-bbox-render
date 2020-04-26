@@ -7,7 +7,7 @@ extern crate serde_derive;
 
 extern crate pretty_env_logger;
 
-pub mod web;
+mod web;
 
 use std::net::SocketAddr;
 
@@ -15,7 +15,7 @@ use clap::{App, Arg, SubCommand};
 use glyph_bbox::dataset;
 use warp::Filter;
 
-pub fn cli_entrypoint<'b, 'a>() -> App<'a, 'b> {
+fn cli_entrypoint<'b, 'a>() -> App<'a, 'b> {
     App::new("glyph-bbox-render")
         .version(crate_version!())
         .author("Mihir Singh (@citruspi)")
