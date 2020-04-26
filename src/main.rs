@@ -2,10 +2,8 @@
 extern crate clap;
 #[macro_use]
 extern crate log;
-#[macro_use]
-extern crate serde_derive;
-
 extern crate pretty_env_logger;
+extern crate serde_derive;
 
 mod web;
 
