@@ -7,6 +7,7 @@ default:
 stages:
   - assets
   - test
+  - publish
 
 yarn:
   stage: assets
@@ -42,3 +43,13 @@ publish_dry_run:
     - cargo login $CRATES_IO_TOKEN
   script:
     - cargo publish --dry-run --allow-dirty
+
+crates_io:
+  stage: publish
+  before_script:
+    - cargo login $CRATES_IO_TOKEN
+  script:
+    - cargo publish --allow-dirty
+  only:
+    refs:
+      - master
