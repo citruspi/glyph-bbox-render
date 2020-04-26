@@ -5,14 +5,15 @@ extern crate pretty_env_logger;
 
 use std::net::SocketAddr;
 
-use glyph_bbox;
+use glyph_bbox::dataset;
+use glyph_bbox_render;
 use warp::Filter;
 
 #[tokio::main]
 async fn main() {
-    pretty_env_logger::init_custom_env("GLYPH_BBOX_LOG_LEVEL");
+    pretty_env_logger::init_custom_env("GLYPH_BBOX_GENERATE_LOG_LEVEL");
 
-    let rt = glyph_bbox::cli_entrypoint().get_matches();
+    let rt = glyph_bbox_render::cli_entrypoint().get_matches();
 
     match rt.subcommand_name() {
         Some(v) => {
@@ -20,14 +21,14 @@ async fn main() {
 
             match v {
                 "bbox" => {
-                    let ds = glyph_bbox::DataSet::from_file(glyph_bbox::ReadOptions {
+                    let ds = dataset::DataSet::from_file(dataset::ReadOptions {
                         filename: args.value_of("dataset").unwrap().to_owned(),
-                        format: glyph_bbox::Format::JSON,
+                        format: dataset::Format::JSON,
                     });
 
                     let bbox = ds.bounding_box(
                         args.value_of("str").unwrap(),
-                        glyph_bbox::BoundingBoxRenderOptions {
+                        dataset::BoundingBoxRenderOptions {
                             face: args.value_of("face").unwrap().to_owned(),
                             size: args.value_of("size").unwrap().to_owned(),
                         },
@@ -39,21 +40,21 @@ async fn main() {
                     }
                 }
                 "stat" => {
-                    let ds = glyph_bbox::DataSet::from_file(glyph_bbox::ReadOptions {
+                    let ds = dataset::DataSet::from_file(dataset::ReadOptions {
                         filename: args.value_of("path").unwrap().to_owned(),
-                        format: glyph_bbox::Format::JSON,
+                        format: dataset::Format::JSON,
                     });
 
                     println!("{:#?}", ds);
                 }
                 "server" => {
                     let index_html = warp::path::end()
-                        .and_then(|| glyph_bbox::web::serve_file("index.html", "text/html"));
+                        .and_then(|| glyph_bbox_render::web::serve_file("index.html", "text/html"));
                     let main_js = warp::path("main.js").and_then(|| {
-                        glyph_bbox::web::serve_file("main.js", "application/javascript")
+                        glyph_bbox_render::web::serve_file("main.js", "application/javascript")
                     });
                     let raphael_js = warp::path("raphael.js").and_then(|| {
-                        glyph_bbox::web::serve_file(
+                        glyph_bbox_render::web::serve_file(
                             "vendor/raphael.min.js",
                             "application/javascript",
                         )
@@ -61,9 +62,9 @@ async fn main() {
 
                     let write = warp::post()
                         .and(warp::path!("write"))
-                        .and(warp::query::<glyph_bbox::WriteOptions>())
+                        .and(warp::query::<dataset::WriteOptions>())
                         .and(warp::body::json())
-                        .and_then(glyph_bbox::web::write_dataset);
+                        .and_then(glyph_bbox_render::web::write_dataset);
 
                     let bind_addr: SocketAddr = args
                         .value_of("bind")

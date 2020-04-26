@@ -1,7 +1,7 @@
 use rust_embed::RustEmbed;
 use warp::{http::HeaderValue, reply::Response, Rejection, Reply};
 
-use crate::dataset;
+use glyph_bbox::dataset;
 
 #[derive(RustEmbed)]
 #[folder = "assets/web"]

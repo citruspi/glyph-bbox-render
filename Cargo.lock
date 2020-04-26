@@ -314,8 +314,20 @@ dependencies = [
 [[package]]
 name = "glyph-bbox"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e862110c4416ed147900550d00d652cd26266216a30db5a547964cf07f604d72"
+dependencies = [
+ "serde",
+ "serde_derive",
+ "serde_json",
+]
+
+[[package]]
+name = "glyph-bbox-render"
+version = "0.1.0"
 dependencies = [
  "clap",
+ "glyph-bbox",
  "log 0.4.8",
  "pretty_env_logger",
  "rust-embed",

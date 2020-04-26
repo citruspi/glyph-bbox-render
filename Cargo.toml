@@ -1,5 +1,5 @@
 [package]
-name = "glyph-bbox"
+name = "glyph-bbox-render"
 version = "0.1.0"
 authors = ["Mihir Singh <git.service@mihirsingh.com>"]
 edition = "2018"
@@ -9,6 +9,7 @@ edition = "2018"
 [dependencies]
 tokio = { version = "0.2", features = ["macros"] }
 clap = "2.33.0"
+glyph-bbox = "0.1.0"
 log = "0.4.8"
 pretty_env_logger = "0.4.0"
 rust-embed = "5.5.1"

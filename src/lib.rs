@@ -5,14 +5,12 @@ extern crate log;
 #[macro_use]
 extern crate serde_derive;
 
-pub mod dataset;
 pub mod web;
 
 use clap::{App, Arg, SubCommand};
-pub use dataset::*;
 
 pub fn cli_entrypoint<'b, 'a>() -> App<'a, 'b> {
-    App::new("glyph-bbox")
+    App::new("glyph-bbox-render")
         .version(crate_version!())
         .author("Mihir Singh (@citruspi)")
         .subcommand(
